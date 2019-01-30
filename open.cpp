@@ -1,36 +1,16 @@
 #include"nlohmann/json.hpp"
+#include"Editor.hpp"
 #include<iostream>
 #include<fstream>
-#include<cstdlib>
 #include<string>
-#include<vector>
-#include<map>
 
 namespace mann = nlohmann;
-
-class Editor
-{
-private:
-	const std::string _name;
-public:
-	Editor(std::string nn): _name(nn){}
-	~Editor() = default;
-
-	inline int open(std::string openFile,
-			std::string mode) const
-	{
-		std::string command{_name + ' ' + mode + ' ' + openFile};
-		return system(command.c_str());
-	}
-	/*TODO:int open(std::string openfile,
-	  	enum Kind mode) const;*/
-};
 
 int main(int argc,char** argv)
 {
 
 	/*choose Opening vim version*/
-	const Editor editor (
+	Editor editor (
 		"gvim"
 	);
 
@@ -49,14 +29,8 @@ int main(int argc,char** argv)
 	mann::json text;
 	fin >> text;
 
-	/*do it*/
-	for(auto srcFile : text["source-file-list"])
-		if(editor.open(srcFile,"--remote-silent -c :vsp"))
-			std::cerr << "***ERROR***: Cannot open source file"
-				<< srcFile << "\n";
-	for(auto hdrFile: text["header-file-list"])
-		if(editor.open(hdrFile,"--remote-silent -c :vsp"))
-			std::cerr << "***ERROR***: Cannot open header file"
-				<< hdrFile << "\n";
+	/*Do it*/
+	editor.open(text["source-file-list"].begin(),
+			text["source-file-list"].end(),"-O");
 	return 0;
 }

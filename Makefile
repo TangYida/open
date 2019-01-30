@@ -1,4 +1,4 @@
-FLAGS=-std=c++17
+FLAGS=-std=c++0x
 CC=g++
 
 all: open
@@ -6,7 +6,8 @@ all: open
 open: open.o
 	$(CC) -o open open.o $(FLAGS)
 
-open.o: nlohmann/json.hpp
+open.o: nlohmann/json.hpp Editor.hpp
+	$(CC) -c open.cpp $(FLAGS)
 
 run:
 	./open

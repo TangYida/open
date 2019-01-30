@@ -1,8 +1,6 @@
 {
 	"source-file-list":[
-		"open.cpp"
-	],
-	"header-file-list":[
+		"open.cpp",
 		"nlohmann/json.hpp"
 	]
 }
