@@ -10,7 +10,7 @@ namespace mann = nlohmann;
 class Editor
 {
 private:
-	const std::string _name;
+	std::string _name;
 	inline void _system(const char* command)
 	{
 		/*Why not std::system(char*) ?Reasons:
@@ -20,15 +20,11 @@ private:
 		 *TODO:But in this case it might not be cross-platform.
 		 *TODO:Can it be morer clever?
 		 */
-		auto pid = fork();
-		if(pid == 0)
-			execl("/bin/sh","sh","-c",command,NULL);
-		else
-			std::cout << "Opening your project."
-				"But do not close me.\n";
+		execl("/bin/sh","sh","-c",command,NULL);
 	}
 public:
 	Editor(std::string nn): _name(nn){}
+	Editor(): _name("vim"){}
 	~Editor() = default;
 
 	inline int open(std::string openFile,
@@ -48,6 +44,12 @@ public:
 	}
 	/*TODO:int open(std::string openfile,
 	  	enum Kind mode) const;*/
+	
+	inline void load(std::string name)
+	{_name = name;}
+
+	inline std::string editorName()
+	{return _name;}
 };
 
 #endif

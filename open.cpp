@@ -10,16 +10,13 @@ int main(int argc,char** argv)
 {
 
 	/*choose Opening vim version*/
-	Editor editor (
-		"gvim"
-	);
+	Editor editor;
+	if(argc > 1)
+		editor.load(argv[0]);
 
 	/*init file writing ofstream*/
 	std::ifstream fin;
-	if(argc > 1)
-		fin.open(argv[0]);
-	else
-		fin.open("Openfile.json");
+	fin.open("Openfile.json");
 	if(!fin.is_open()) {
 		std::cerr << "***ERROR***: Cannot open Openfile.json.\n";
 		exit(1);
