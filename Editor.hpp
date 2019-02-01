@@ -24,7 +24,7 @@ private:
 	}
 public:
 	Editor(std::string nn): _name(nn){}
-	Editor(): _name("vim"){}
+	Editor(): _name("gvim"){}
 	~Editor() = default;
 
 	inline int open(std::string openFile,

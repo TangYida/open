@@ -1,5 +1,6 @@
-#include"nlohmann/json.hpp"
-#include"Editor.hpp"
+#include "nlohmann/json.hpp"
+#include "Editor.hpp"
+#include "error.hpp"
 #include<iostream>
 #include<fstream>
 #include<string>
@@ -18,8 +19,8 @@ int main(int argc,char** argv)
 	std::ifstream fin;
 	fin.open("Openfile.json");
 	if(!fin.is_open()) {
-		std::cerr << "***ERROR***: Cannot open Openfile.json.\n";
-		exit(1);
+		msgErr("Cannot open Openfile.json.");
+		return 1;
 	}
 
 	/*Load Openfile.json*/

@@ -1,7 +1,10 @@
 {
-        "source-file-list": [
-                "new.cpp",
-                "open.cpp",
-                "Editor.hpp"
-        ]
+    "source-file-list": [
+        "Editor.hpp",
+        "new.cpp",
+        "open.cpp",
+        "Makefile",
+        "error.hpp",
+        "del.cpp"
+    ]
 }
